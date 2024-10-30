@@ -1,0 +1,17 @@
+#apiVersion: dapr.io/v1alpha1
+#kind: Component
+#metadata:
+#  name: factory-conveyor-belt-redis
+#spec:
+#  type: state.redis
+#  version: v1
+#  metadata:
+#    - name: redisHost
+#      value: #fill in
+#    - name: redisUsername
+#      value: default
+#    - name: redisPassword
+#      value: # fill in
+#  # Uncomment this if you wish to use Redis as a state store for actors (optional)
+#    - name: actorStateStore
+#      value: "true"
