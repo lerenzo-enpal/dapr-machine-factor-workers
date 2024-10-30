@@ -3,7 +3,7 @@ kind: Subscription
 metadata:
   name: conveyor-belt-subscription
 spec:
-  topic: conveyor-belt 
+  topic: "conveyor-belt"
   routes:
     default: "/internal/conveyorBelt"
   pubsubname: factory-conveyor-belt-rabbitmq
