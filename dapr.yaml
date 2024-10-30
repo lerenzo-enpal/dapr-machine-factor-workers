@@ -1,0 +1,16 @@
+version: 1
+apps:
+  - appID: factory-worker
+    resourcesPaths:
+      - .dapr/resources
+    appDirPath: .
+    config: .dapr/config.yaml
+    appPort: 5002
+    logLevel: warn
+    appLogDestination: console
+    daprdLogDestination: console
+    createService: true
+    command: [ "dotnet","run", "--project", "Enpal.DaprMachineFactor.Workers/Enpal.DaprMachineFactor.Workers.csproj" ]
+    env:
+      DEBUG: true
+      ASPNETCORE_ENVIRONMENT: Local

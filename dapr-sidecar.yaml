@@ -1,0 +1,13 @@
+version: 1
+apps:
+  - appID: factory-worker
+    resourcesPaths:
+      - .dapr/resources
+    appDirPath: .
+    config: .dapr/config.yaml
+    appPort: 5002
+    logLevel: debug
+    appLogDestination: console
+    daprdLogDestination: console
+    daprHTTPPort: 3500
+    daprGRPCPort: 50001

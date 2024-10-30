@@ -1,0 +1,20 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: eventhub-beebop # name that will be used in production as well
+spec:
+  type: pubsub.kafka
+  version: v1
+  metadata:
+    - name: brokers
+      value: "localhost:9092"
+    - name: maxMessageBytes
+      value: 2048
+    - name: consumeRetryInterval
+      value: 200ms
+    - name: version
+      value: 1.0.0
+    - name: disableTls
+      value: "true"
+    - name: authType
+      value: "none"
