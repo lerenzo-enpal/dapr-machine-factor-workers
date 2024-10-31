@@ -5,7 +5,7 @@ apps:
       - .dapr/resources
     appDirPath: .
     config: .dapr/config.yaml
-    appPort: 5002
+    appPort: 5253
     logLevel: debug
     appLogDestination: console
     daprdLogDestination: console

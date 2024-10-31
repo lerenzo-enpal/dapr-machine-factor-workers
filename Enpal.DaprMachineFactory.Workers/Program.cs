@@ -1,26 +1,46 @@
+using System.Text.Json;
+using Dapr;
+using Enpal.DaprMachineFactory.Workers.Models;
+
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddControllers().AddDapr();
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.MapPost("/internal/conveyorBelt",
+    [Topic("factory-conveyor-belt-kafka", "conveyor-belt")]
+    async (ILogger<Program> logger, ConveyorBeltPayload conveyorBeltPayload) =>
+    {
+        logger.LogInformation(JsonSerializer.Serialize(conveyorBeltPayload));
+        logger.LogInformation("wooohhhh");
+        await Task.Delay(4);
+        return 3;
+    });
 
-app.MapControllers();
-app.UseRouting().UseCloudEvents();
-app.UseHttpsRedirection();
+app.MapPost("/internal/conveyorBelt",
+    [Topic("factory-conveyor-belt-rabbitmq", "conveyor-belt")]
+    async (ILogger<Program> logger, ConveyorBeltPayload conveyorBeltPayload) =>
+    {
+        logger.LogInformation(JsonSerializer.Serialize(conveyorBeltPayload));
+        logger.LogInformation("wooohhhh");
+        await Task.Delay(4);
+        return 3;
+    });
+
+app.MapPost("/conveyor-belt-scheduler",
+    (ILogger<Program> logger) =>
+    {
+        logger.LogInformation("Prepare a Payload.");
+
+        ConveyorBeltPayload conveyorBeltPayload = new(Guid.NewGuid().ToString(), new List<Asset>()
+        {
+            new(AssetClass.Battery, Guid.NewGuid().ToString()),
+            new(AssetClass.Heatpump, Guid.NewGuid().ToString()),
+            new(AssetClass.Inverter, Guid.NewGuid().ToString()),
+            new(AssetClass.Wallbox, Guid.NewGuid().ToString())
+        });
+        
+        return Results.Ok();
+    });
+
+app.UseCloudEvents();
+app.MapSubscribeHandler();
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
