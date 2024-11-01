@@ -10,7 +10,7 @@ public class CompleteAssetActivity(DaprClient client) : WorkflowActivity<List<As
     
     public override async Task<ConveyorBeltPayload> RunAsync(WorkflowActivityContext context, List<Asset> input)
     {
-        var id = new Guid();
+        var id = Guid.NewGuid();
         var conveyorBeltPayload = new ConveyorBeltPayload(id.ToString(), input);
         await client.SaveStateAsync(StoreName, $"assembled.{id}", conveyorBeltPayload);
 

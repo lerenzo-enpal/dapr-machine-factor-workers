@@ -1,5 +1,5 @@
 @Enpal.DaprMachineFactory.Workers_HostAddress = http://localhost:5253
-@id = first-try
+@id = id_of_the_workflow
 ###
 
 POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/internal/conveyorBelt-rabbitmq
@@ -15,7 +15,7 @@ Accept: application/json
 Content-Type: application/json
 ###
 
-POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/stopWorkflow//{{id}}
+POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/stopWorkflow/{{id}}
 Accept: application/json
 Content-Type: application/json
 ###
