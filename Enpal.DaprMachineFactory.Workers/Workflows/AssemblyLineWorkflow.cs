@@ -12,18 +12,15 @@ public class AssemblyLineWorkflow : Workflow<bool, bool>
          * Create Commands
          */
 
-            var battery = context.WaitForExternalEventAsync<Asset>(AssetClass.Battery.ToString());
-            var wallbox = context.WaitForExternalEventAsync<Asset>(AssetClass.Wallbox.ToString());
-            var heatpump = context.WaitForExternalEventAsync<Asset>(AssetClass.Heatpump.ToString());
-            var inverter = context.WaitForExternalEventAsync<Asset>(AssetClass.Inverter.ToString());
-            var assets = await Task.WhenAll([battery, wallbox, heatpump, inverter]);
-            
-            //finish activity 
-            var conveyorBeltPayload = await context.CallActivityAsync<Guid>(nameof(CompleteAssetActivity), assets);
-            // service invocation
-            await context.CallActivityAsync<Guid>(nameof(NotifyActivity), conveyorBeltPayload);
-        
-            context.ContinueAsNew();
+        var battery = context.WaitForExternalEventAsync<Asset>(AssetClass.Battery.ToString());
+        var wallbox = context.WaitForExternalEventAsync<Asset>(AssetClass.Wallbox.ToString());
+        var heatpump = context.WaitForExternalEventAsync<Asset>(AssetClass.Heatpump.ToString());
+        var inverter = context.WaitForExternalEventAsync<Asset>(AssetClass.Inverter.ToString());
+        var assets = await Task.WhenAll([battery, wallbox, heatpump, inverter]);
+
+        var conveyorBeltPayload = await context.CallActivityAsync<Guid>(nameof(CompleteAssetActivity), assets);
+        await context.CallActivityAsync<Guid>(nameof(NotifyActivity), conveyorBeltPayload);
+        context.ContinueAsNew();
 
         return true;
     }
