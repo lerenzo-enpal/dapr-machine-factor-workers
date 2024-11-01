@@ -1,0 +1,26 @@
+@Enpal.DaprMachineFactory.Workers_HostAddress = http://localhost:5253
+@id = first-try
+###
+
+POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/internal/conveyorBelt-rabbitmq
+Accept: application/json
+Content-Type: application/json
+
+{"assetClass":3,"europeanArticleNumber":"840ee180-dbef-452e-a40a-60f44b00acee"}
+
+###
+
+POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/startWorkflow/{{id}}
+Accept: application/json
+Content-Type: application/json
+###
+
+POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/stopWorkflow//{{id}}
+Accept: application/json
+Content-Type: application/json
+###
+
+POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/getWorkflowStatus/{{id}}
+Accept: application/json
+Content-Type: application/json
+###
