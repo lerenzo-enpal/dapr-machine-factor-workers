@@ -1,13 +1,5 @@
 @Enpal.DaprMachineFactory.Workers_HostAddress = http://localhost:5253
-@id = id_of_the_workflow
-###
-
-POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/internal/conveyorBelt-rabbitmq
-Accept: application/json
-Content-Type: application/json
-
-{"assetClass":3,"europeanArticleNumber":"840ee180-dbef-452e-a40a-60f44b00acee"}
-
+@id = my_favorite_workflow
 ###
 
 POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/startWorkflow/{{id}}

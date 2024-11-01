@@ -29,12 +29,13 @@ app.MapPost("/stopWorkflow/{id}", (DaprWorkflowClient daprWorkflowClient, string
 app.MapPost("/getWorkflowStatus/{id}", (DaprWorkflowClient daprWorkflowClient, string id) =>
     daprWorkflowClient.GetWorkflowStateAsync(id)
 );
+
 app.MapPost("/conveyorBelt",
     [Topic("factory-conveyor-belt-kafka", "conveyor-belt")] 
     [Topic("factory-conveyor-belt-rabbitmq", "conveyor-belt")]
     async (ILogger<Program> logger, DaprClient client, DaprWorkflowClient daprWorkflowClient, Asset asset) =>
     {
-        logger.LogInformation($"wooohhhh kafka {JsonSerializer.Serialize(asset)}");
+        logger.LogInformation("[PubSub Conveyor Belt Handler]: {asset}", JsonSerializer.Serialize(asset));
         await client.SaveStateAsync("factory-warehouse", $"assets.{asset.EuropeanArticleNumber}", asset);
         if (workflowId is not null)
             await daprWorkflowClient.RaiseEventAsync(workflowId, asset.AssetClass.ToString(), asset);

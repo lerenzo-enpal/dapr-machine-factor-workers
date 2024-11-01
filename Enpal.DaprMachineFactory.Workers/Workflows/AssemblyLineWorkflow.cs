@@ -16,9 +16,10 @@ public class AssemblyLineWorkflow : Workflow<bool, bool>
         var wallbox = context.WaitForExternalEventAsync<Asset>(AssetClass.Wallbox.ToString());
         var heatpump = context.WaitForExternalEventAsync<Asset>(AssetClass.Heatpump.ToString());
         var inverter = context.WaitForExternalEventAsync<Asset>(AssetClass.Inverter.ToString());
-        var assets = await Task.WhenAll([battery, wallbox, heatpump, inverter]);
-
+        var assets = await Task.WhenAll([battery, wallbox, heatpump, inverter]); 
+        
         var conveyorBeltPayload = await context.CallActivityAsync<ConveyorBeltPayload>(nameof(CompleteAssetActivity), assets);
+        context.SetCustomStatus($"{DateTime.Now}: {conveyorBeltPayload}");
         await context.CallActivityAsync<ConveyorBeltPayload>(nameof(NotifyActivity), conveyorBeltPayload);
         context.ContinueAsNew();
 

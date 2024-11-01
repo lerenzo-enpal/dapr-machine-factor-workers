@@ -1,0 +1,6 @@
+apiVersion: dapr.io/v1alpha1
+kind: HTTPEndpoint
+metadata:
+  name: factory-announcements
+spec:
+  baseUrl: "https://enpal.webhook.office.com/webhookb2/77241224-8928-4e20-a88d-fee3394cde79@d22da9a6-d89a-4764-9d56-96b020869dff/IncomingWebhook/8e756e5ae8014014958ff08fc327fa91/b3abfc87-6ba1-4be6-8089-d62194baf101/V2dVy8XdbVYO65iiKtGkAcZLHWtPPAlktHJJgS3-ulguk1"

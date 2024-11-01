@@ -6,7 +6,7 @@ namespace Enpal.DaprMachineFactory.Workers.Workflows.Activities;
 
 public class CompleteAssetActivity(DaprClient client) : WorkflowActivity<List<Asset>, ConveyorBeltPayload>
 {
-    private const string StoreName = "factory-warehouse";
+    private const string StoreName = "factory-warehouse-completed-items";
     
     public override async Task<ConveyorBeltPayload> RunAsync(WorkflowActivityContext context, List<Asset> input)
     {

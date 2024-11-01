@@ -1,7 +1,7 @@
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: factory-warehouse
+  name: factory-conveyor-belt-pg
 spec:
   type: state.postgresql
   version: v2
@@ -9,6 +9,6 @@ spec:
     - name: connectionString
       value: "postgresql://localhost:5542?user=postgres&password=password"
     - name: actorStateStore
-      value: "false"
+      value: "true"
     - name: tablePrefix
-      value: "warehouse_"
+      value: "conveyor_belt_"

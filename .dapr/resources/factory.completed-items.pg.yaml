@@ -1,7 +1,7 @@
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: factory-warehouse
+  name: factory-warehouse-completed-items
 spec:
   type: state.postgresql
   version: v2
@@ -11,4 +11,4 @@ spec:
     - name: actorStateStore
       value: "false"
     - name: tablePrefix
-      value: "warehouse_"
+      value: "completed_items_"
