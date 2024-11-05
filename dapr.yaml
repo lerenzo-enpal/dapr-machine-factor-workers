@@ -6,10 +6,10 @@ apps:
     appDirPath: .
     config: .dapr/config.yaml
     appPort: 5253
-    logLevel: debug
+    logLevel: warn
     appLogDestination: console
     daprdLogDestination: console
-    command: [ "dotnet","run", "--project", "Enpal.DaprMachineFactory.Workers/Enpal.DaprMachineFactory.Workers.csproj" ]
+    command: [ "dotnet","run", "--no-restore", "--project", "Enpal.DaprMachineFactory.Workers/Enpal.DaprMachineFactory.Workers.csproj" ]
     env:
       DEBUG: true
       ASPNETCORE_ENVIRONMENT: Local

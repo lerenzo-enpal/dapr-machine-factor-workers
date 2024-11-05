@@ -2,17 +2,28 @@
 @id = my_favorite_workflow
 ###
 
-POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/startWorkflow/{{id}}
+POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/startWorkflow
 Accept: application/json
 Content-Type: application/json
 ###
 
-POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/stopWorkflow/{{id}}
+POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/resumeWorkflow
 Accept: application/json
 Content-Type: application/json
 ###
 
-POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/getWorkflowStatus/{{id}}
+POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/stopWorkflow
+Accept: application/json
+Content-Type: application/json
+
+###
+POST {{Enpal.DaprMachineFactory.Workers_HostAddress}}/purgeWorkflow
+Accept: application/json
+Content-Type: application/json
+###
+
+###
+GET {{Enpal.DaprMachineFactory.Workers_HostAddress}}/workflowStatus
 Accept: application/json
 Content-Type: application/json
 ###
