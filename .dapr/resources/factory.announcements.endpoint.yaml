@@ -1,6 +1,0 @@
-apiVersion: dapr.io/v1alpha1
-kind: HTTPEndpoint
-metadata:
-  name: factory-announcements
-spec:
-  baseUrl: ""
